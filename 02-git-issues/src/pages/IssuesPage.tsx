@@ -1,7 +1,9 @@
 import { FC, useState } from 'react'
-import { IssueList, LabelPicker } from '../components'
+import { IssueList, LabelPicker, LoadingIcon } from '../components'
+import { useIssues } from '../hooks'
 
 export const IssuesPage: FC = () => {
+    const issuesQuery = useIssues()
     const [selectedLabels, setSelectedLabels] = useState<string[]>([])
 
     const onLabelChange = (labelName: string) => {
@@ -15,7 +17,11 @@ export const IssuesPage: FC = () => {
     return (
         <div className='row mt-5'>
             <div className='col-8'>
-                <IssueList />
+                {
+                    issuesQuery.isLoading
+                        ? (<LoadingIcon />)
+                        : (<IssueList issues={issuesQuery.data || []} />)
+                }
             </div>
             <div className='col-4'>
                 <LabelPicker selectedLabels={selectedLabels} onChange={onLabelChange} />
