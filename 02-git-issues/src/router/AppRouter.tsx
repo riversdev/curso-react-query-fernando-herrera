@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { IssuePage, IssuesPage } from '../pages'
+import { IssuePage, IssuesPage, IssuesPageInfinite } from '../pages'
 
 export const AppRouter: FC = () => {
     return (
@@ -9,6 +9,7 @@ export const AppRouter: FC = () => {
 
             <Routes>
                 <Route path='issues' element={<IssuesPage />} />
+                <Route path='issues-infinite' element={<IssuesPageInfinite />} />
                 <Route path='issues/:id' element={<IssuePage />} />
 
                 <Route path='*' element={<Navigate to='issues' />} />
